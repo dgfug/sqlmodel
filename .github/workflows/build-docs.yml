@@ -11,6 +11,10 @@ on:
         default: false
 jobs:
   build-docs:
+    permissions:
+      contents: write
+      deployments: write
+      pull-requests: write
     runs-on: ubuntu-20.04
     steps:
       - name: Dump GitHub context
