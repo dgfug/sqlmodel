@@ -1,19 +1,19 @@
 <p align="center">
-  <a href="https://sqlmodel.tiangolo.com"><img src="https://sqlmodel.tiangolo.com/img/logo-margin/logo-margin-vector.svg" alt="SQLModel"></a>
+  <a href="https://sqlmodel.tiangolo.com"><img src="https://sqlmodel.tiangolo.com/img/logo-margin/logo-margin-vector.svg#only-light" alt="SQLModel"></a>
+
 </p>
 <p align="center">
     <em>SQLModel, SQL databases in Python, designed for simplicity, compatibility, and robustness.</em>
 </p>
 <p align="center">
-<a href="https://github.com/tiangolo/sqlmodel/actions?query=workflow%3ATest" target="_blank">
-    <img src="https://github.com/tiangolo/sqlmodel/workflows/Test/badge.svg" alt="Test">
+<a href="https://github.com/fastapi/sqlmodel/actions?query=workflow%3ATest" target="_blank">
+    <img src="https://github.com/fastapi/sqlmodel/workflows/Test/badge.svg" alt="Test">
 </a>
-<a href="https://github.com/tiangolo/sqlmodel/actions?query=workflow%3APublish" target="_blank">
-    <img src="https://github.com/tiangolo/sqlmodel/workflows/Publish/badge.svg" alt="Publish">
+<a href="https://github.com/fastapi/sqlmodel/actions?query=workflow%3APublish" target="_blank">
+    <img src="https://github.com/fastapi/sqlmodel/workflows/Publish/badge.svg" alt="Publish">
 </a>
-<a href="https://codecov.io/gh/tiangolo/sqlmodel" target="_blank">
-    <img src="https://img.shields.io/codecov/c/github/tiangolo/sqlmodel?color=%2334D058" alt="Coverage">
-</a>
+<a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/fastapi/sqlmodel" target="_blank">
+    <img src="https://coverage-badge.samuelcolvin.workers.dev/fastapi/sqlmodel.svg" alt="Coverage">
 <a href="https://pypi.org/project/sqlmodel" target="_blank">
     <img src="https://img.shields.io/pypi/v/sqlmodel?color=%2334D058&label=pypi%20package" alt="Package version">
 </a>
@@ -23,7 +23,7 @@
 
 **Documentation**: <a href="https://sqlmodel.tiangolo.com" target="_blank">https://sqlmodel.tiangolo.com</a>
 
-**Source Code**: <a href="https://github.com/tiangolo/sqlmodel" target="_blank">https://github.com/tiangolo/sqlmodel</a>
+**Source Code**: <a href="https://github.com/fastapi/sqlmodel" target="_blank">https://github.com/fastapi/sqlmodel</a>
 
 ---
 
@@ -39,6 +39,14 @@ The key features are:
 * **Extensible**: You have all the power of SQLAlchemy and Pydantic underneath.
 * **Short**: Minimize code duplication. A single type annotation does a lot of work. No need to duplicate models in SQLAlchemy and Pydantic.
 
+## Sponsors
+
+<!-- sponsors -->
+
+<a href="https://www.govcert.lu" target="_blank" title="This project is being supported by GOVCERT.LU"><img src="https://sqlmodel.tiangolo.com/img/sponsors/govcert.png"></a>
+
+<!-- /sponsors -->
+
 ## SQL Databases in FastAPI
 
 <a href="https://fastapi.tiangolo.com" target="_blank"><img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" style="width: 20%;"></a>
@@ -51,11 +59,13 @@ It combines SQLAlchemy and Pydantic and tries to simplify the code you write as 
 
 ## Requirements
 
-A recent and currently supported version of Python (right now, <a href="https://www.python.org/downloads/" class="external-link" target="_blank">Python supports versions 3.6 and above</a>).
+A recent and currently supported <a href="https://www.python.org/downloads/" class="external-link" target="_blank">version of Python</a>.
 
 As **SQLModel** is based on **Pydantic** and **SQLAlchemy**, it requires them. They will be automatically installed when you install SQLModel.
 
 ## Installation
+
+Make sure you create a <a href="https://sqlmodel.tiangolo.com/virtual-environments/" class="external-link" target="_blank">virtual environment</a>, activate it, and then install SQLModel, for example with:
 
 <div class="termy">
 
@@ -69,7 +79,7 @@ Successfully installed sqlmodel
 
 ## Example
 
-For an introduction to databases, SQL, and everything else, see the <a href="https://sqlmodel.tiangolo.com" target="_blank">SQLModel documentation</a>.
+For an introduction to databases, SQL, and everything else, see the <a href="https://sqlmodel.tiangolo.com/databases/" target="_blank">SQLModel documentation</a>.
 
 Here's a quick example. ✨
 
@@ -212,4 +222,4 @@ And at the same time, ✨ it is also a **Pydantic** model ✨. You can use inher
 
 ## License
 
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the [MIT license](https://github.com/fastapi/sqlmodel/blob/main/LICENSE).

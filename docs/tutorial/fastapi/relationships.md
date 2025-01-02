@@ -40,69 +40,23 @@ Let's update that. 🤓
 
 First, why is it that we are not getting the related data for each hero and for each team?
 
-It's because we declared the `HeroRead` with only the same base fields of the `HeroBase` plus the `id`. But it doesn't include a field `team` for the **relationship attribute**.
+It's because we declared the `HeroPublic` with only the same base fields of the `HeroBase` plus the `id`. But it doesn't include a field `team` for the **relationship attribute**.
 
-And the same way, we declared the `TeamRead` with only the same base fields of the `TeamBase` plus the `id`. But it doesn't include a field `heroes` for the **relationship attribute**.
+And the same way, we declared the `TeamPublic` with only the same base fields of the `TeamBase` plus the `id`. But it doesn't include a field `heroes` for the **relationship attribute**.
 
-```Python hl_lines="3-5  9-10  14-19  23-24"
-# Code above omitted 👆
-
-{!./docs_src/tutorial/fastapi/teams/tutorial001.py[ln:7-9]!}
-
-# Code here omitted 👈
-
-{!./docs_src/tutorial/fastapi/teams/tutorial001.py[ln:22-23]!}
-
-# Code here omitted 👈
-
-{!./docs_src/tutorial/fastapi/teams/tutorial001.py[ln:32-37]!}
-
-# Code here omitted 👈
-
-{!./docs_src/tutorial/fastapi/teams/tutorial001.py[ln:46-47]!}
-
-# Code below omitted 👇
-```
-
-<details>
-<summary>👀 Full file preview</summary>
-
-```Python
-{!./docs_src/tutorial/fastapi/teams/tutorial001.py!}
-```
-
-</details>
+{* ./docs_src/tutorial/fastapi/teams/tutorial001_py310.py ln[5:7,20:21,29:34,43:44] hl[5:7,20:21,29:34,43:44] *}
 
 Now, remember that <a href="https://fastapi.tiangolo.com/tutorial/response-model/" class="external-link" target="_blank">FastAPI uses the `response_model` to validate and **filter** the response data</a>?
 
-In this case, we used `response_model=TeamRead` and `response_model=HeroRead`, so FastAPI will use them to filter the response data, even if we return a **table model** that includes **relationship attributes**:
+In this case, we used `response_model=TeamPublic` and `response_model=HeroPublic`, so FastAPI will use them to filter the response data, even if we return a **table model** that includes **relationship attributes**:
 
-```Python hl_lines="3  8  12  17"
-# Code above omitted 👆
-
-{!./docs_src/tutorial/fastapi/teams/tutorial001.py[ln:105-110]!}
-
-# Code here omitted 👈
-
-{!./docs_src/tutorial/fastapi/teams/tutorial001.py[ln:160-165]!}
-
-# Code below omitted 👇
-```
-
-<details>
-<summary>👀 Full file preview</summary>
-
-```Python
-{!./docs_src/tutorial/fastapi/teams/tutorial001.py!}
-```
-
-</details>
+{* ./docs_src/tutorial/fastapi/teams/tutorial001_py310.py ln[102:107,156:161] hl[102,107,156,161] *}
 
 ## Don't Include All the Data
 
 Now let's stop for a second and think about it.
 
-We cannot simply include *all* the data including all the internal relationships, because each **hero** has an attribute `team` with their team, and then that **team** also has an attribute `heroes` with all the **heroes** in the team, including this one.
+We cannot simply include *all* the data, including all the internal relationships, because each **hero** has an attribute `team` with their team, and then that **team** also has an attribute `heroes` with all the **heroes** in the team, including this one.
 
 If we tried to include everything, we could make the server application **crash** trying to extract **infinite data**, going through the same hero and team over and over again internally, something like this:
 
@@ -152,7 +106,7 @@ If we tried to include everything, we could make the server application **crash*
 }
 ```
 
-As you can see, in this example we would get the hero **Rusty-Man**, and from this hero we would get the team **Preventers**, and then from this team we would get its heroes, of course, including **Rusty-Man**... 😱
+As you can see, in this example, we would get the hero **Rusty-Man**, and from this hero we would get the team **Preventers**, and then from this team we would get its heroes, of course, including **Rusty-Man**... 😱
 
 So we start again, and in the end, the server would just crash trying to get all the data with a `"Maximum recursion error"`, we would not even get a response like the one above.
 
@@ -164,7 +118,7 @@ This is a decision that will depend on **each application**.
 
 In our case, let's say that if we get a **list of heroes**, we don't want to also include each of their teams in each one.
 
-And if we get a **list of teams**, we don't want to get a a list of the heroes for each one.
+And if we get a **list of teams**, we don't want to get a list of the heroes for each one.
 
 But if we get a **single hero**, we want to include the team data (without the team's heroes).
 
@@ -174,36 +128,21 @@ Let's add a couple more **data models** that declare that data so we can use the
 
 ## Models with Relationships
 
-Let's add the models `HeroReadWithTeam` and `TeamReadWithHeroes`.
+Let's add the models `HeroPublicWithTeam` and `TeamPublicWithHeroes`.
 
 We'll add them **after** the other models so that we can easily reference the previous models.
 
-```Python hl_lines="3-4  7-8"
-# Code above omitted 👆
+{* ./docs_src/tutorial/fastapi/relationships/tutorial001_py310.py ln[59:64] hl[59:60,63:64] *}
 
-{!./docs_src/tutorial/fastapi/relationships/tutorial001.py[ln:61-66]!}
-
-# Code below omitted 👇
-```
-
-<details>
-<summary>👀 Full file preview</summary>
-
-```Python
-{!./docs_src/tutorial/fastapi/relationships/tutorial001.py!}
-```
-
-</details>
-
-These two models are very **simple in code**, but there's a lot happening here, let's check it out.
+These two models are very **simple in code**, but there's a lot happening here. Let's check it out.
 
 ### Inheritance and Type Annotations
 
-The `HeroReadWithTeam` **inherits** from `HeroRead`, which means that it will have the **normal fields for reading**, including the required `id` that was declared in `HeroRead`.
+The `HeroPublicWithTeam` **inherits** from `HeroPublic`, which means that it will have the **normal fields for reading**, including the required `id` that was declared in `HeroPublic`.
 
-And then it adds the **new field** `team`, which could be `None`, and is declared with the type `TeamRead` with the base fields for reading a team.
+And then it adds the **new field** `team`, which could be `None`, and is declared with the type `TeamPublic` with the base fields for reading a team.
 
-Then we do the same for the `TeamReadWithHeroes`, it **inherits** from `TeamRead`, and declare the **new field** `heroes` which is a list of `HeroRead`.
+Then we do the same for the `TeamPublicWithHeroes`, it **inherits** from `TeamPublic`, and declares the **new field** `heroes`, which is a list of `HeroPublic`.
 
 ### Data Models Without Relationship Attributes
 
@@ -213,11 +152,11 @@ Instead, here these are only **data models** that will tell FastAPI **which attr
 
 ### Reference to Other Models
 
-Also notice that the field `team` is not declared with this new `TeamReadWithHeroes`, because that would again create that infinite recursion of data. Instead, we declare it with the normal `TeamRead` model.
+Also, notice that the field `team` is not declared with this new `TeamPublicWithHeroes`, because that would again create that infinite recursion of data. Instead, we declare it with the normal `TeamPublic` model.
 
-And the same for `TeamReadWithHeroes`, the model used for the new field `heroes` uses `HeroRead` to get only each hero's data.
+And the same for `TeamPublicWithHeroes`, the model used for the new field `heroes` uses `HeroPublic` to get only each hero's data.
 
-This also means that, even though we have these two new models, **we still need the previous ones**, `HeroRead` and `TeamRead`, because we need to reference them here (and we are also using them in the rest of the *path operations*).
+This also means that, even though we have these two new models, **we still need the previous ones**, `HeroPublic` and `TeamPublic`, because we need to reference them here (and we are also using them in the rest of the *path operations*).
 
 ## Update the Path Operations
 
@@ -227,26 +166,7 @@ This will tell **FastAPI** to take the object that we return from the *path oper
 
 In the case of the hero, this tells FastAPI to extract the `team` too. And in the case of the team, to extract the list of `heroes` too.
 
-```Python hl_lines="3  8  12  17"
-# Code above omitted 👆
-
-{!./docs_src/tutorial/fastapi/relationships/tutorial001.py[ln:113-118]!}
-
-# Code here omitted 👈
-
-{!./docs_src/tutorial/fastapi/relationships/tutorial001.py[ln:168-173]!}
-
-# Code below omitted 👇
-```
-
-<details>
-<summary>👀 Full file preview</summary>
-
-```Python
-{!./docs_src/tutorial/fastapi/relationships/tutorial001.py!}
-```
-
-</details>
+{* ./docs_src/tutorial/fastapi/relationships/tutorial001_py310.py ln[111:116,165:170] hl[111,116,165,170] *}
 
 ## Check It Out in the Docs UI
 
@@ -267,7 +187,7 @@ Now we get the **team** data included:
     "id": 1,
     "team": {
         "name": "Z-Force",
-        "headquarters": "Sister Margaret’s Bar",
+        "headquarters": "Sister Margaret's Bar",
         "id": 1
     }
 }
@@ -326,7 +246,7 @@ Now we get the list of **heroes** included:
 
 ## Recap
 
-Using the same techniques to declare additonal **data models** we can tell FastAPI what data to return in the responses, even when we return **table models**.
+Using the same techniques to declare additional **data models**, we can tell FastAPI what data to return in the responses, even when we return **table models**.
 
 Here we almost **didn't have to change the FastAPI app** code, but of course, there will be cases where you need to get the data and process it in different ways in the *path operation function* before returning it.
 
@@ -334,4 +254,4 @@ But even in those cases, you will be able to define the **data models** to use i
 
 By this point, you already have a very robust API to handle data in a SQL database combining **SQLModel** with **FastAPI**, and implementing **best practices**, like data validation, conversion, filtering, and documentation. ✨
 
-In the next chapter I'll tell you how to implement automated **testing** for your application using FastAPI and SQLModel. ✅
+In the next chapter, I'll tell you how to implement automated **testing** for your application using FastAPI and SQLModel. ✅

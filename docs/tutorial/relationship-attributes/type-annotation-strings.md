@@ -2,20 +2,7 @@
 
 In the first Relationship attribute, we declare it with `List["Hero"]`, putting the `Hero` in quotes instead of just normally there:
 
-```Python hl_lines="11"
-{!./docs_src/tutorial/relationship_attributes/define_relationship_attributes/tutorial001.py[ln:1-21]!}
-
-# Code below omitted 👇
-```
-
-<details>
-<summary>👀 Full file preview</summary>
-
-```Python
-{!./docs_src/tutorial/relationship_attributes/define_relationship_attributes/tutorial001.py!}
-```
-
-</details>
+{* ./docs_src/tutorial/relationship_attributes/define_relationship_attributes/tutorial001_py310.py ln[1:19] hl[9] *}
 
 What's that about? Can't we just write it normally as `List[Hero]`?
 
@@ -29,5 +16,8 @@ And of course, **SQLModel** can also understand it in the string correctly. ✨
 
 That is actually part of Python, it's the current official solution to handle it.
 
-!!! info
-    There's a lot of work going on in Python itself to make that simpler and more intuitive, and find ways to make it possible to not wrap the class in a string.
+/// info
+
+There's a lot of work going on in Python itself to make that simpler and more intuitive, and find ways to make it possible to not wrap the class in a string.
+
+///

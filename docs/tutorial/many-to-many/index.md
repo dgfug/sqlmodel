@@ -26,12 +26,15 @@ The `team` table looks like this:
 <td>1</td><td>Preventers</td><td>Sharp Tower</td>
 </tr>
 <tr>
-<td>2</td><td>Z-Force</td><td>Sister Margaret’s Bar</td>
+<td>2</td><td>Z-Force</td><td>Sister Margaret's Bar</td>
 </tr>
 </table>
 
-!!! tip
-    Notice that it doesn't have any foreign key to other tables.
+/// tip
+
+Notice that it doesn't have any foreign key to other tables.
+
+///
 
 And the `hero` table looks like this:
 
@@ -60,7 +63,7 @@ Notice that each hero can only have **one** connection. But each team can receiv
 
 ## Introduce Many-to-Many
 
-But let's say that as **Deadpond** is a great chracter, they recruit him to the new **Preventers** team, but he's still part of the **Z-Force** team too.
+But let's say that as **Deadpond** is a great character, they recruit him to the new **Preventers** team, but he's still part of the **Z-Force** team too.
 
 So, now, we need to be able to have a hero that is connected to **many** teams. And then, each team, should still be able to receive **many** heroes. So we need a **Many-to-Many** relationship.
 
@@ -106,19 +109,22 @@ Specifically, the new link table `heroteamlink` would be:
 </tr>
 </table>
 
-!!! info
-    Other names used for this **link table** are:
+/// info
 
-    * association table
-    * secondary table
-    * junction table
-    * intermediate table
-    * join table
-    * through table
-    * relationship table
-    * connection table
+Other names used for this **link table** are:
 
-    I'm using the term "link table" because it's short, doesn't collide with other terms already used (e.g. "relationship"), it's easy to remember how to write it, etc.
+* association table
+* secondary table
+* junction table
+* intermediate table
+* join table
+* through table
+* relationship table
+* connection table
+
+I'm using the term "link table" because it's short, doesn't collide with other terms already used (e.g. "relationship"), it's easy to remember how to write it, etc.
+
+///
 
 ## Link Primary Key
 

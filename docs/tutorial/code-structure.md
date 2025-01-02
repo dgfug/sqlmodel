@@ -8,7 +8,7 @@ The class `Hero` has a reference to the class `Team` internally.
 
 But the class `Team` also has a reference to the class `Hero`.
 
-So, if those two classes where in separate files and you tried to import the classes in each other's file directly, it would result in a **circular import**. 🔄
+So, if those two classes were in separate files and you tried to import the classes in each other's file directly, it would result in a **circular import**. 🔄
 
 And Python will not be able to handle it and will throw an error. 🚨
 
@@ -138,7 +138,7 @@ So, the output would be:
 $ python -m project.app
 
 Created hero: id=1 secret_name='Dive Wilson' team_id=1 name='Deadpond' age=None
-Hero's team: name='Z-Force' headquarters='Sister Margaret’s Bar' id=1
+Hero's team: name='Z-Force' headquarters='Sister Margaret's Bar' id=1
 ```
 
 </div>
@@ -149,10 +149,13 @@ Let's say that for some reason you hate the idea of having all the database mode
 
 You can also do it. 😎 There's a couple of things to keep in mind. 🤓
 
-!!! warning
-    This is a bit more advanced.
+/// warning
 
-    If the solution above already worked for you, that might be enough for you, and you can continue in the next chapter. 🤓
+This is a bit more advanced.
+
+If the solution above already worked for you, that might be enough for you, and you can continue in the next chapter. 🤓
+
+///
 
 Let's assume that now the file structure is:
 
@@ -168,9 +171,9 @@ Let's assume that now the file structure is:
 
 ### Circular Imports and Type Annotations
 
-The problem with circular imports is that Python can't resolve them at <abbr title="While it is executing the program, as oposed to the code as just text in a file stored on disk.">*runtime*</abbr>.
+The problem with circular imports is that Python can't resolve them at <abbr title="While it is executing the program, as opposed to the code as just text in a file stored on disk.">*runtime*</abbr>.
 
-but when using Python **type annotations** it's very common to need to declare the type of some variables with classes imported from other files.
+But when using Python **type annotations** it's very common to need to declare the type of some variables with classes imported from other files.
 
 And the files with those classes might **also need to import** more things from the first files.
 
@@ -198,7 +201,7 @@ It has a value of `True` for editors and tools that analyze the code with the ty
 
 But when Python is executing, its value is `False`.
 
-So, we can us it in an `if` block and import things inside the `if` block. And they will be "imported" only for editors, but not at runtime.
+So, we can use it in an `if` block and import things inside the `if` block. And they will be "imported" only for editors, but not at runtime.
 
 ### Hero Model File
 
@@ -240,7 +243,7 @@ And running that achieves the same result as before:
 $ python -m project.app
 
 Created hero: id=1 age=None name='Deadpond' secret_name='Dive Wilson' team_id=1
-Hero's team: id=1 name='Z-Force' headquarters='Sister Margaret’s Bar'
+Hero's team: id=1 name='Z-Force' headquarters='Sister Margaret's Bar'
 ```
 
 </div>

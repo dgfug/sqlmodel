@@ -5,15 +5,15 @@ from sqlmodel import Field, Session, SQLModel, create_engine
 
 class Team(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
+    name: str = Field(index=True)
     headquarters: str
 
 
 class Hero(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
+    name: str = Field(index=True)
     secret_name: str
-    age: Optional[int] = None
+    age: Optional[int] = Field(default=None, index=True)
 
     team_id: Optional[int] = Field(default=None, foreign_key="team.id")
 
@@ -31,7 +31,7 @@ def create_db_and_tables():
 def create_heroes():
     with Session(engine) as session:
         team_preventers = Team(name="Preventers", headquarters="Sharp Tower")
-        team_z_force = Team(name="Z-Force", headquarters="Sister Margaret’s Bar")
+        team_z_force = Team(name="Z-Force", headquarters="Sister Margaret's Bar")
         session.add(team_preventers)
         session.add(team_z_force)
         session.commit()
